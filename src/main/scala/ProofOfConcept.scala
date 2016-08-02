@@ -208,7 +208,7 @@ object LeftistHeap extends HeapFactoryFactory {
       val array = new Array[Heap](len)
       for (i <- 0 until len) array(i) = Node(elems(i),Empty,Empty)
       while (len > 1) {
-        val half = (len-1)/2
+        val half = len/2
         for (i <- 0 until half) array(i) = array(2*i) merge array(2*i+1)
         if (len % 2 == 0) len = half
         else {
@@ -217,7 +217,7 @@ object LeftistHeap extends HeapFactoryFactory {
         }
       }
       if (len == 0) Empty
-      else array(1)
+      else array(0)
     }
     def newBuilder: Builder[Elem,Heap] = new Builder[Elem,Heap] {
       val buffer = scala.collection.mutable.ArrayBuffer.empty[Elem]
