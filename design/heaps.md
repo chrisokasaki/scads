@@ -236,11 +236,20 @@ down explicitly.  In reality, the user would probably only write
 val minHeaps = LeftistHeap.minFactory[Int]
 val maxHeaps = LeftistHeap.maxFactory[Int]
 ```
+Actually in the current version, this is now
+```scala
+val minHeaps = LeftistHeap.Min.factory[Int]
+val maxHeaps = LeftistHeap.Max.factory[Int]
+```
+where `LeftistHeap.Min` and `LeftistHeap.Max` both support other
+simpler methods for creating `SHeap`s for users who don't need `merge`.
+For example, a user could write
+```scala
+val h1 = LeftistHeap.Min.empty[Int] // an empty min-heap of integers
+val h2 = LeftistHeap.Max(1,2,3) // a max-heap containing 1, 2, and 3
+```
 
-_There's more we can do here to better support min-heaps vs max-heaps, but
-I'll save that for another time._
-
-_And, of course, there's lots more needed to flesh the whole design out into an
+_Of course, there's lots more needed to flesh the whole design out into an
 industrial-strength API, and even more to integrate it with the current
 Scala collections. I'll continue to work on this, and I welcome discussion on
 these issues._
